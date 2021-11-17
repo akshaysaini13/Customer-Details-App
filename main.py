@@ -1,5 +1,4 @@
 # importing modules/libraries
-
 import sqlite3 as sq
 from sqlite3.dbapi2 import Cursor
 from tkinter import *
@@ -17,7 +16,7 @@ try:
     cursor.execute(
         "create table customer(name text, address text, mobile text, nationality text, aadhar integer, email text, gender text, father_name text)")
     con.commit()
-    print("Table created")
+    # print("Table created")
 except:
     print("table already exists")
 con.close()
@@ -42,8 +41,7 @@ logo_img_tk = ImageTk.PhotoImage(logo_img, master=win)
 logo_img_lb = Label(win, image=logo_img_tk, bg='black')
 logo_img_lb.place(x=0, y=0)
 
-title_lb = Label(win, text="Add Customer Details", bg='#000000',
-                 fg='#FFFFFF', font=('Ariel', 47), width=40)
+title_lb = Label(win, text="Add Customer Details", bg='#000000',fg='#FFFFFF', font=('Ariel', 47), width=40)
 title_lb.place(relx=.05, rely=0)
 
 
@@ -52,9 +50,8 @@ cus_detail_frame = Frame(win)
 cus_detail_frame.place(relx=.01, rely=.1, relwidth=.4, relheight=.85)
 
 
-# Details inside Customer frame
-cus_detail_lbl = Label(
-    cus_detail_frame, text="Customer Details", font=('Ariel', 18, "bold"))
+# Details inside Customer details frame
+cus_detail_lbl = Label(cus_detail_frame, text="Customer Details", font=('Ariel', 18, "bold"))
 cus_detail_lbl.place(relx=.01, rely=.01)
 
 cus_name = Label(cus_detail_frame, text="Name:", font=('Ariel', 14))
@@ -66,8 +63,7 @@ cus_address.place(relx=.01, rely=.2)
 cus_mobile = Label(cus_detail_frame, text="Mobile No.:", font=('Ariel', 14))
 cus_mobile.place(relx=.01, rely=.3)
 
-cus_nationality = Label(
-    cus_detail_frame, text="Nationality:", font=('Ariel', 14))
+cus_nationality = Label(cus_detail_frame, text="Nationality:", font=('Ariel', 14))
 cus_nationality.place(relx=.01, rely=.4)
 
 cus_aadhar = Label(cus_detail_frame, text="Aadhar Number:", font=('Ariel', 14))
@@ -101,12 +97,12 @@ aadhar_e.place(relx=.5, rely=.5)
 email_e = Entry(cus_detail_frame, font=('Ariel', 14), bd=5, fg='black')
 email_e.place(relx=.5, rely=.6)
 
-cus_gender_e = Combobox(cus_detail_frame, values=[
-                        'Male', 'Female', "Prefer not to say"], font=('Ariel', 14))
+cus_gender_e = Combobox(cus_detail_frame, values=['Male', 'Female', "Prefer not to say"], font=('Ariel', 14))
 cus_gender_e.place(relx=.5, rely=.7)
 
 father_e = Entry(cus_detail_frame, font=('Ariel', 14), bd=5, fg='black')
 father_e.place(relx=.5, rely=.8)
+
 
 # function to add detials to DB
 def add(event):
@@ -172,11 +168,10 @@ def update(event):
         messagebox.showinfo("Update Details", "Details not updated!")
 
 
-
-# Function to delet customer name on the basis of their name
+# Function to delete customer record on the basis of their name
 def delete(event):
     """"
-    Event listner to delete the customer details on the basis of their Mobile number
+    Event listner to delete the customer record on the basis of their Mobile number
     """
     n = name_e.get()
     ad = add_e.get()
@@ -208,6 +203,7 @@ def delete(event):
             con.close()
 
 
+#Function to reset all the input fields to blank
 def reset(event):
     """"
     Event listener for reset button. 
@@ -226,7 +222,7 @@ def reset(event):
     name_e.focus()
 
 
-# Buttons
+#CRUD Buttons
 add_btn = Button(cus_detail_frame, text="Add", font=(
     'Ariel', 12, 'bold'), bg='black', fg='yellow', width=12)
 add_btn.place(relx=.01, rely=.9)
@@ -248,8 +244,7 @@ reset_btn.place(relx=.73, rely=.9)
 reset_btn.bind("<Button>", reset)  # Todo
 
 
-# Show detail frame
-
+# Show Customer detail frame
 search_view_frame = Frame(win)
 search_view_frame.place(relx=0.43, rely=.1, relwidth=.55, relheight=.85)
 
@@ -269,6 +264,7 @@ search_input = Entry(search_view_frame, font=('Ariel', 18), width=17)
 search_input.place(relx=.4, rely=.1)
 
 
+#Function to display records of customer according to Category select and input provided by user in the input field
 def search(event):
     """"
     Search event listner to display records according category and input provided by user
@@ -297,7 +293,6 @@ def search(event):
                 "\t\t\t" + row[6] + "\t\t\t" + row[7] + "\t"
 
         st.insert("end", info)
-        
 
 
 def showall(event):
@@ -313,7 +308,7 @@ def showall(event):
         info = info + "\n" + "\t" + row[0] + "\t\t" + row[1] + "\t\t" + row[2] + "\t\t" + row[3] + \
             "\t\t\t" + str(row[4]) + "\t\t\t" + row[5] + \
             "\t\t\t" + row[6] + "\t\t\t" + row[7] + "\t"
-    
+
     st.insert("end", info)
 
 
@@ -327,7 +322,6 @@ showall_btn = Button(search_view_frame, text="Show all", font=(
 showall_btn.place(relx=.85, rely=.1)
 showall_btn.bind("<Button>", showall)
 
-# textVsb = Scrollbar(search_view_frame)
 hori_scroll = Scrollbar(search_view_frame, orient='horizontal')
 hori_scroll.pack(side=BOTTOM, fill='x')
 
