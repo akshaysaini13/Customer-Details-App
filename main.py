@@ -16,10 +16,12 @@ try:
     cursor.execute(
         "create table customer(name text, address text, mobile text, nationality text, aadhar integer, email text, gender text, father_name text)")
     con.commit()
-    # print("Table created")
+    print("Table created")
+    con.close()
 except:
     print("table already exists")
-con.close()
+    
+
 
 # Creating Tk class object
 win = Tk()
@@ -329,7 +331,6 @@ hori_scroll.pack(side=BOTTOM, fill='x')
 st = Text(search_view_frame, height=28, width=90, wrap="none",
           xscrollcommand=hori_scroll.set, font=("Arial", 12, "bold"))
 st.place(relx=.04, rely=.2)
-# st.pack()
 st.insert("end", "\tName\t\tAddress\t\tMobile\t\tNationality\t\t\tAadhar\t\t\tEmail\t\t\tGender\t\tFather's name\t\n")
 st.insert("end", "------------------------------------------------------------------------------------------------------------"
           "--------------------------------------------------------------------------------------------------------------------------------------------")
